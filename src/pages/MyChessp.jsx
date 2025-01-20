@@ -1,4 +1,5 @@
 import React from 'react';
+import { img1, img2, img3, img4, img5 } from './mychess/index.js';
 
 const renderButton = (text, link, primary = true) => (
   <a
@@ -38,88 +39,99 @@ const Documentation = () => {
         </section>
         
         {/* CSS/JS Code Explanation */}
-        <h2 className="text-2xl font-bold mb-4">1. CSS/JS Code Explanation</h2>
+        <h2 className="text-2xl font-bold mb-4">1. Features of My Chess Game 🕹️</h2>
         <div className="flex flex-col md:flex-row mb-12">
           {/* Left Side */}
           
           <div className="md:w-2/3 pr-4">
-            
             <p className="mb-2">
-              The <code>createBoard</code> function dynamically creates and updates the
-              chessboard on the page. Here’s a breakdown of its key components:
+              The <code>MyChess</code> project offers a dynamic and interactive chess experience across devices. Here’s a breakdown of its key features:
             </p>
 
-            <h3 className="text-xl font-semibold mt-4 mb-2">Board Initialization</h3>
+            <h3 className="text-xl font-semibold mt-4 mb-2">Multi-Device Compatibility</h3>
             <ul className="list-disc pl-5 mb-4">
               <li>
-                <code>gameBoard.innerHTML = ""</code>: Clears the existing chessboard to
-                ensure a fresh start.
+                Play chess seamlessly on any device, whether it’s a mobile, tablet, or desktop.
               </li>
               <li>
-                Loops through <code>chessBoard</code> (array representation of the board)
-                to create squares and populate them with pieces.
+                The responsive design ensures a smooth and uninterrupted user experience.
               </li>
             </ul>
 
-            <h3 className="text-xl font-semibold mt-4 mb-2">Square Creation</h3>
+            <h3 className="text-xl font-semibold mt-4 mb-2">Drag-and-Drop Functionality</h3>
             <ul className="list-disc pl-5 mb-4">
               <li>
-                Each square is represented by a <code>div</code> element with a class of
-                <code>square</code>.
+                Intuitive gameplay with drag-and-drop functionality for moving pieces.
               </li>
               <li>
-                Alternating colors (beige or brown) are assigned based on the sum of the
-                row and column indices.
+                Eliminates the need for complex inputs—just drag and drop pieces to play.
               </li>
             </ul>
 
-            <h3 className="text-xl font-semibold mt-4 mb-2">Piece Representation</h3>
+            <h3 className="text-xl font-semibold mt-4 mb-2">Real-Time Updates</h3>
             <ul className="list-disc pl-5 mb-4">
               <li>
-                If a square contains a piece, a <code>div</code> is created to represent
-                the piece.
-              </li>
-              <li>
-                CSS classes like <code>white</code> or <code>black</code> are used to
-                indicate the piece's color.
-              </li>
-              <li>
-                A <code>span</code> element is added to represent the piece's type (e.g.,
-                rook, bishop).
+                The game updates dynamically in real-time, providing a fluid and interactive experience.
               </li>
             </ul>
 
-            <h3 className="text-xl font-semibold mt-4 mb-2">Drag and Drop for Moves</h3>
+            <h3 className="text-xl font-semibold mt-4 mb-2">Pop-Up Notifications</h3>
             <ul className="list-disc pl-5 mb-4">
               <li>
-                Pieces are made draggable for players with the appropriate role.
-              </li>
-              <li>
-                <code>dragstart</code> stores the source square and piece being moved.
-              </li>
-              <li>
-                <code>dragend</code> resets the state after the drag action.
-              </li>
-              <li>
-                <code>drop</code> handles moving the piece to the target square.
+                Instant alerts for important game events:
+                <ul className="list-disc pl-5">
+                  <li>
+                    🏆 <strong>Checkmate! You win!</strong>
+                  </li>
+                  <li>
+                    ❌ <strong>Checkmate! You lose!</strong>
+                  </li>
+                  <li>
+                    🤝 <strong>Stalemate! The game is a draw.</strong>
+                  </li>
+                  <li>
+                    ⚠️ <strong>The king is in check!</strong>
+                  </li>
+                </ul>
               </li>
             </ul>
 
-            <h3 className="text-xl font-semibold mt-4 mb-2">Chessboard Rotation</h3>
-            <p className="mb-2">
-              The board rotates 180° for the black player using a <code>flipped</code> CSS
-              class.
-            </p>
+            <h3 className="text-xl font-semibold mt-4 mb-2">Real-Time Chat Feature</h3>
+            <ul className="list-disc pl-5 mb-4">
+              <li>
+                Communicate with your opponent during the game using the real-time chat functionality.
+              </li>
+              <li>
+                Share strategies, discuss moves, or simply chat while playing.
+              </li>
+            </ul>
           </div>
+
 
           {/* Right Side */}
           <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-            <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-              <p className="text-gray-600">Image Placeholder 1</p>
-            </div>
-            <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-              <p className="text-gray-600">Image Placeholder 2</p>
-            </div>
+          <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+            <img 
+              src={img1} 
+              alt="Optimized Image 1" 
+              className="w-full h-full object-cover rounded-lg" 
+              loading="lazy" 
+              width="100%" 
+              height="100%" 
+            />
+          </div>
+          <div className="bg-gray-300 rounded-md w-full max-w-[400px]  flex items-center justify-center">
+            <img 
+              src={img2} 
+              alt="Optimized Image 2" 
+              className="w-full h-full object-cover rounded-lg" 
+              loading="lazy" 
+              width="100%" 
+              height="100%" 
+            />
+          </div>
+
+            
           </div>
         </div>
 
@@ -134,10 +146,16 @@ const Documentation = () => {
             <div className="flex flex-col md:flex-row mb-12 gap-6">
               {/* Left Side (Images) */}
               <div className="md:w-1/3 flex justify-center items-center gap-4 flex-col space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                  <p className="text-gray-600">Image Placeholder 1</p>
-                </div>
-                
+              <div className="bg-gray-300 rounded-md w-full max-w-[400px]  flex items-center justify-center">
+                <img 
+                  src={img3} 
+                  alt="Optimized Image 3" 
+                  className="w-full h-full object-cover rounded-lg" 
+                  loading="lazy" 
+                  width="100%" 
+                  height="100%" 
+                />
+              </div>
               </div>
 
               {/* Right Side (Text) */}
@@ -202,9 +220,16 @@ const Documentation = () => {
 
           {/* Right Side */}
           <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-            <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-              <p className="text-gray-600">Image Placeholder 1</p>
-            </div>
+          <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+            <img 
+              src={img4} 
+              alt="Optimized Image 4" 
+              className="w-full h-full object-cover rounded-lg" 
+              loading="lazy" 
+              width="100%" 
+              height="100%" 
+            />
+          </div>
           </div>
         </div>
 
@@ -217,9 +242,16 @@ const Documentation = () => {
         <div className="flex flex-col md:flex-row mb-12 gap-10">
           {/* Left Side */}
           <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-            <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-              <p className="text-gray-600">Image Placeholder 1</p>
-            </div>
+          <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+            <img 
+              src={img5} 
+              alt="Optimized Image 5" 
+              className="w-full h-full object-cover rounded-lg" 
+              loading="lazy" 
+              width="100%" 
+              height="100%" 
+            />
+          </div>
             
           </div>
 

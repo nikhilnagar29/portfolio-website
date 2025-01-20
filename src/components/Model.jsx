@@ -1,6 +1,32 @@
 import myImage from '../assets/Image.png';
+import { useEffect } from 'react';
+import { checkApiStatus } from "../utils/apiUtils";
 
 const Model = () => {
+
+    useEffect(() => {
+        const callApis = () => {
+            checkApiStatus(
+                "https://learning-platform-backend-tqmf.onrender.com/check",
+                "Live Whiteboard API is running"
+            );
+
+            checkApiStatus(
+                "https://sociogram-qnup.onrender.com/check",
+                "SocioGram API is running"
+            );
+
+            checkApiStatus(
+                "https://sociogram-3cog.onrender.com/check",
+                "SocioGram is running"
+            );
+
+        };
+
+        callApis();
+    }, []);
+
+    
     return (
         <div className="min-h-screen flex items-center justify-center px-4">
             {/* Main Container */}

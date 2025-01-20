@@ -1,4 +1,7 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { checkApiStatus } from '../utils/apiUtils.js';
+import { img1, img2, img3, img4 } from './LiveWhiteBoard/index.js';
 
 const renderButton = (text, link, primary = true) => (
   <a
@@ -16,6 +19,19 @@ const renderButton = (text, link, primary = true) => (
 );
 
 const Documentation = () => {
+
+    useEffect(() => {
+            const callApis = () => {
+                checkApiStatus(
+                    "https://learning-platform-backend-tqmf.onrender.com/check",
+                    "Live Whiteboard API is running"
+                );
+            };
+
+            callApis();
+        }, []);
+
+
   return (
     <div className="bg-gray-100 text-gray-800 min-h-screen px-6 sm:px-12 lg:px-24 py-12">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
@@ -32,7 +48,7 @@ const Documentation = () => {
         {/* Buttons */}
         <section className="text-center mb-10">
           <div className="flex justify-center gap-5">
-            {renderButton('GitHub Repo', 'https://github.com/nikhilnagar29/practice-platform')}
+            {renderButton('GitHub Repo', 'https://github.com/nikhilnagar29/learning_platform')}
             {renderButton('Live Demo', 'https://learning-platform-4v3s.onrender.com/', false)}
           </div>
         </section>
@@ -73,9 +89,16 @@ const Documentation = () => {
 
                   {/* Right Side */}
           <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-            <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-              <p className="text-gray-600">Image Placeholder 1</p>
-            </div>
+            <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                <img 
+                  src={img1} 
+                  alt="Optimized Image 1" 
+                  className="w-full h-full object-cover rounded-lg" 
+                  loading="lazy" 
+                  width="100%" 
+                  height="100%" 
+                />
+              </div>
             
           </div>
         </div>
@@ -89,9 +112,16 @@ const Documentation = () => {
             <div className="flex flex-col md:flex-row mb-12 gap-6">
               {/* Left Side (Images) */}
               <div className="md:w-1/3 flex justify-center items-center gap-4 flex-col space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                  <p className="text-gray-600">Image Placeholder 1</p>
-                </div>
+                <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                    <img 
+                      src={img2} 
+                      alt="Optimized Image 2" 
+                      className="w-full h-full object-cover rounded-lg" 
+                      loading="lazy" 
+                      width="100%" 
+                      height="100%" 
+                    />
+                  </div>
                 
               </div>
 
@@ -158,9 +188,16 @@ const Documentation = () => {
 
   {/* Right Side */}
   <div className="md:w-1/3 flex flex-col items-center justify-center gap-4">
-    <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-      <p className="text-gray-600">Image Placeholder 1</p>
-    </div>
+    <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+        <img 
+          src={img3} 
+          alt="Optimized Image 3" 
+          className="w-full h-full object-cover rounded-lg" 
+          loading="lazy" 
+          width="100%" 
+          height="100%" 
+        />
+      </div>
   </div>
 </div>
 
@@ -179,8 +216,15 @@ const Documentation = () => {
            
             {/* Right Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                <p className="text-gray-600">Image Placeholder 1</p>
+                <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                  <img 
+                    src={img4} 
+                    alt="Optimized Image 4" 
+                    className="w-full h-full object-cover rounded-lg" 
+                    loading="lazy" 
+                    width="100%" 
+                    height="100%" 
+                  />
                 </div>
                 
             </div>

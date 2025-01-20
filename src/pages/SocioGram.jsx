@@ -1,4 +1,7 @@
 import React from 'react';
+import { useEffect , useState} from 'react';
+import { checkApiStatus } from '../utils/apiUtils.js';
+import { img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14 } from './sociogram/index.js';
 
 const renderButton = (text, link, primary = true) => (
   <a
@@ -16,6 +19,60 @@ const renderButton = (text, link, primary = true) => (
 );
 
 const Documentation = () => {
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+
+    useEffect(() => {
+            const callApis = () => {
+                checkApiStatus(
+                    "https://sociogram-qnup.onrender.com/check",
+                    "SocioGram API is running"
+                );
+    
+                checkApiStatus(
+                    "https://sociogram-3cog.onrender.com/check",
+                    "SocioGram is running"
+                );
+    
+            };
+    
+            callApis();
+        }, []);
+
+
+        const handleClick = async () => {
+            setLoading(true);
+            setMessage(""); // Clear any previous messages
+
+            setTimeout(() => {setMessage("Wait 10 seconds, we are trying to connect with the server...");
+            } , 600);
+
+            try {
+              const response = await fetch("https://sociogram-3cog.onrender.com/check/");
+        
+              if (response.ok) {
+                // Clear message and loading before opening the new tab
+                setTimeout(() => {setMessage("");
+                } , 600);
+                setLoading(false);
+
+
+                window.open("https://sociogram-3cog.onrender.com/", "_blank");
+                // window.location.href = "https://sociogram-3cog.onrender.com/";
+
+              } else {
+                setMessage("Still trying to connect, please wait a moment...");
+              }
+            } catch (error) {
+              setMessage("Error connecting to the server. Please try again later.");
+            } finally {
+
+              setLoading(false);
+              setMessage('');
+            }
+          };
+    
+
   return (
     <div className="bg-gray-100 text-gray-800 min-h-screen px-6 sm:px-12 lg:px-24 py-12">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
@@ -32,11 +89,86 @@ const Documentation = () => {
         {/* Buttons */}
         <section className="text-center mb-10">
           <div className="flex justify-center gap-5">
-            {renderButton('GitHub Repo', 'https://github.com/nikhilnagar29/practice-platform')}
-            {renderButton('Live Demo', 'https://learning-platform-4v3s.onrender.com/', false)}
+            {/* {renderButton('GitHub Repo', 'https://github.com/nikhilnagar29/socioGram')} */}
+            <a
+                href={"https://github.com/nikhilnagar29/socioGram"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`px-6 py-3 rounded shadow hover:opacity-90 inline-block ${
+                true
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black border border-black hover:bg-gray-100'
+                }`}
+            >
+                {"GitHub Repo"}
+            </a>
+            <button
+                onClick={handleClick}
+                className={`px-6 py-3 rounded shadow hover:opacity-90 inline-block ${
+                loading ? "bg-gray-500 text-white" : "bg-white text-black border border-black hover:bg-gray-100"
+                }`}
+                disabled={loading}
+            >
+                Live Demo
+            </button>
+            
+            
+            {/* {renderButton('Live Demo', 'https://sociogram-3cog.onrender.com/', false)} */}
           </div>
+          <div className="flex flex-col items-center">
+                {message && (
+                    <p className="mt-4 text-center text-gray-700">
+                    {message}
+                    </p>
+                )}
+            </div>
         </section>
         
+        {/* 0 */}
+        <div className="mb-12">
+            <div className="w-full mb-6">
+                <h2 className="text-3xl font-bold mb-4">Technologies Used</h2>
+            </div>
+
+            <div className='flex flex-col md:flex-row '>
+                {/* Backend Section */}
+                <div className="md:w-1/2 flex flex-col mb-6 md:pr-4">
+                    <h3 className="text-xl font-semibold mb-2">Backend</h3>
+                    <ul className="list-disc pl-5">
+                        <li>Node.js: For creating server-side logic and APIs.</li>
+                        <li>Express.js: As the web application framework for routing and middleware.</li>
+                        <li>MongoDB: For database management and schema design.</li>
+                        <li>Redis: For caching and session management.</li>
+                        <li>Multer: For handling file uploads like images.</li>
+                        <li>bcrypt: For secure password hashing.</li>
+                        <li>jsonwebtoken: For user authentication and authorization.</li>
+                    </ul>
+                </div>
+
+                {/* Frontend Section */}
+                <div className="md:w-1/2 flex flex-col mb-6 md:pl-4">
+                    <h3 className="text-xl font-semibold mb-2">Frontend</h3>
+                    <ul className="list-disc pl-5">
+                        <li>EJS (Embedded JavaScript Templates): For server-side rendering of HTML.</li>
+                        <li>Tailwind CSS: For responsive and modern styling.</li>
+                        <li>JavaScript: For interactive and dynamic UI elements.</li>
+                    </ul>
+                    {/* Additional Tools Section */}
+                    <div className="w-full flex flex-col mb-6">
+                        <h3 className="text-xl font-semibold mb-2">Additional Tools</h3>
+                        <ul className="list-disc pl-5">
+                            <li>Git/GitHub: For version control.</li>
+                            <li>Render: For hosting.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                
+            </div>
+
+        </div>
+
+
         
         <h2 className="text-3xl font-semibold mb-4">Features</h2>
 
@@ -65,9 +197,16 @@ const Documentation = () => {
 
             {/* Right Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                <p className="text-gray-600">Image Placeholder 1</p>
-                </div>
+            <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                <img 
+                    src={img1} 
+                    alt="Optimized Image 1" 
+                    className="w-full h-full object-cover rounded-lg" 
+                    loading="lazy" 
+                    width="100%" 
+                    height="100%" 
+                />
+            </div>
                 
             </div>
         </div>
@@ -76,8 +215,15 @@ const Documentation = () => {
         <div className="flex flex-col md:flex-row gap-10 mb-12">
             {/* Left Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                    <p className="text-gray-600">Image Placeholder 6</p>
+                <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                    <img 
+                        src={img2} 
+                        alt="Optimized Image 2" 
+                        className="w-full h-full object-cover rounded-lg" 
+                        loading="lazy" 
+                        width="100%" 
+                        height="100%" 
+                    />
                 </div>
             </div>
 
@@ -134,8 +280,15 @@ const Documentation = () => {
 
             {/* Right Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                    <p className="text-gray-600">Image Placeholder 3</p>
+                <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                    <img 
+                        src={img3} 
+                        alt="Optimized Image 1" 
+                        className="w-full h-full object-cover rounded-lg" 
+                        loading="lazy" 
+                        width="100%" 
+                        height="100%" 
+                    />
                 </div>
             </div>
         </div>
@@ -144,8 +297,15 @@ const Documentation = () => {
         <div className="flex flex-col md:flex-row mb-12 gap-10">
             {/* Left Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                    <p className="text-gray-600">Image Placeholder 7</p>
+                <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                    <img 
+                        src={img4} 
+                        alt="Optimized Image 4" 
+                        className="w-full h-full object-cover rounded-lg" 
+                        loading="lazy" 
+                        width="100%" 
+                        height="100%" 
+                    />
                 </div>
             </div>
 
@@ -200,8 +360,15 @@ const Documentation = () => {
 
             {/* Right Side */}
             <div className="md:w-1/3 flex items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                    <p className="text-gray-600">Image Placeholder 5</p>
+                <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                    <img 
+                        src={img5} 
+                        alt="Optimized Image 5" 
+                        className="w-full h-full object-cover rounded-lg" 
+                        loading="lazy" 
+                        width="100%" 
+                        height="100%" 
+                    />
                 </div>
             </div>
         </div>
@@ -212,8 +379,15 @@ const Documentation = () => {
 
             {/* Left Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                    <p className="text-gray-600">Image Placeholder 4</p>
+                <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                    <img 
+                        src={img6} 
+                        alt="Optimized Image 1" 
+                        className="w-full h-full object-cover rounded-lg" 
+                        loading="lazy" 
+                        width="100%" 
+                        height="100%" 
+                    />
                 </div>
             </div>
 
@@ -276,8 +450,15 @@ const Documentation = () => {
 
                 {/* Left Side */}
                 <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                    <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                        <p className="text-gray-600">Image Placeholder 9</p>
+                        <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                        <img 
+                            src={img7} 
+                            alt="Optimized Image 7" 
+                            className="w-full h-full object-cover rounded-lg" 
+                            loading="lazy" 
+                            width="100%" 
+                            height="100%" 
+                        />
                     </div>
                 </div>
                 
@@ -287,9 +468,16 @@ const Documentation = () => {
             <div className="flex flex-col md:flex-row mb-12 gap-10">
                 {/* Left Side */}
                 <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                    <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                        <p className="text-gray-600">Image Placeholder 16</p>
-                    </div>
+                    <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                        <img 
+                            src={img8} 
+                            alt="Optimized Image 1" 
+                            className="w-full h-full object-cover rounded-lg" 
+                            loading="lazy" 
+                            width="100%" 
+                            height="100%" 
+                        />
+                </div>
                 </div>
 
                 {/* Right Side */}
@@ -348,8 +536,15 @@ const Documentation = () => {
                 
                 {/* Left Side */}
                 <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                    <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                        <p className="text-gray-600">Image Placeholder 10</p>
+                    <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                        <img 
+                            src={img9} 
+                            alt="Optimized Image 1" 
+                            className="w-full h-full object-cover rounded-lg" 
+                            loading="lazy" 
+                            width="100%" 
+                            height="100%" 
+                        />
                     </div>
                 </div>
             </div>
@@ -397,9 +592,16 @@ const Documentation = () => {
 
             {/* Left Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                    <p className="text-gray-600">Image Placeholder 11</p>
-                </div>
+            <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                <img 
+                    src={img10} 
+                    alt="Optimized Image 10" 
+                    className="w-full h-full object-cover rounded-lg" 
+                    loading="lazy" 
+                    width="100%" 
+                    height="100%" 
+                />
+            </div>
             </div>
         </div>
 
@@ -407,8 +609,15 @@ const Documentation = () => {
         <div className="flex flex-col md:flex-row mb-12 gap-10">
             {/* Left Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                    <p className="text-gray-600">Image Placeholder 12</p>
+                <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                    <img 
+                        src={img11} 
+                        alt="Optimized Image 11" 
+                        className="w-full h-full object-cover rounded-lg" 
+                        loading="lazy" 
+                        width="100%" 
+                        height="100%" 
+                    />
                 </div>
             </div>
 
@@ -454,8 +663,15 @@ const Documentation = () => {
             </div>
             {/* Left Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                    <p className="text-gray-600">Image Placeholder 13</p>
+                <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                    <img 
+                        src={img12} 
+                        alt="Optimized Image 1" 
+                        className="w-full h-full object-cover rounded-lg" 
+                        loading="lazy" 
+                        width="100%" 
+                        height="100%" 
+                    />
                 </div>
             </div>
         </div>
@@ -464,9 +680,16 @@ const Documentation = () => {
         <div className="flex flex-col md:flex-row mb-12 gap-10">
             {/* Left Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                    <p className="text-gray-600">Image Placeholder 14</p>
-                </div>
+                <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                    <img 
+                        src={img13} 
+                        alt="Optimized Image 1" 
+                        className="w-full h-full object-cover rounded-lg" 
+                        loading="lazy" 
+                        width="100%" 
+                        height="100%" 
+                    />
+            </div>
             </div>
 
             {/* Right Side */}
@@ -511,58 +734,21 @@ const Documentation = () => {
 
             {/* Left Side */}
             <div className="md:w-1/3 flex flex-col items-center justify-center gap-4 space-y-4">
-                <div className="bg-gray-300 w-full h-64 flex items-center justify-center">
-                    <p className="text-gray-600">Image Placeholder 15</p>
+            <div className="bg-gray-300 rounded-md w-full max-w-[400px] flex items-center justify-center">
+                    <img 
+                        src={img14} 
+                        alt="Optimized Image 14" 
+                        className="w-full h-full object-cover rounded-lg" 
+                        loading="lazy" 
+                        width="100%" 
+                        height="100%" 
+                    />
                 </div>
             </div>
         </div>
 
 
-        {/* 17 */}
-        <div className="mb-12">
-            <div className="w-full mb-6">
-                <h2 className="text-2xl font-bold mb-4">Technologies Used</h2>
-            </div>
-
-            <div className='flex flex-col md:flex-row '>
-                {/* Backend Section */}
-                <div className="md:w-1/2 flex flex-col mb-6 md:pr-4">
-                    <h3 className="text-xl font-semibold mb-2">Backend</h3>
-                    <ul className="list-disc pl-5">
-                        <li>Node.js: For creating server-side logic and APIs.</li>
-                        <li>Express.js: As the web application framework for routing and middleware.</li>
-                        <li>MongoDB: For database management and schema design.</li>
-                        <li>Redis: For caching and session management.</li>
-                        <li>Multer: For handling file uploads like images.</li>
-                        <li>bcrypt: For secure password hashing.</li>
-                        <li>jsonwebtoken: For user authentication and authorization.</li>
-                    </ul>
-                </div>
-
-                {/* Frontend Section */}
-                <div className="md:w-1/2 flex flex-col mb-6 md:pl-4">
-                    <h3 className="text-xl font-semibold mb-2">Frontend</h3>
-                    <ul className="list-disc pl-5">
-                        <li>EJS (Embedded JavaScript Templates): For server-side rendering of HTML.</li>
-                        <li>Tailwind CSS: For responsive and modern styling.</li>
-                        <li>JavaScript: For interactive and dynamic UI elements.</li>
-                    </ul>
-                    {/* Additional Tools Section */}
-                    <div className="w-full flex flex-col mb-6">
-                        <h3 className="text-xl font-semibold mb-2">Additional Tools</h3>
-                        <ul className="list-disc pl-5">
-                            <li>Git/GitHub: For version control.</li>
-                            <li>Render: For hosting.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                
-            </div>
-
-        </div>
-
-
+        
         
 
         

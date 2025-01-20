@@ -39,6 +39,15 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    if (!form.name || !form.email || !form.message) {
+      alert("All fields are required.");
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(form.email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    setLoading(true);
 
     emailjs
       .send(
@@ -46,9 +55,9 @@ const Contact = () => {
         import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
         {
           from_name: form.name,
-          to_name: "Your Name",
+          to_name: "Portfolio-website",
           from_email: form.email,
-          to_email: "your-email@example.com",
+          to_email: "nsquarepart1@gmail.com",
           message: form.message,
         },
         import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
@@ -162,16 +171,15 @@ const Contact = () => {
                         </button>
                     </form>
                 </div>
-        <div className="relative w-full h-[500px]">
-            {/* Spline Viewer */}
-            <spline-viewer
-                url="https://prod.spline.design/1nw5DcK3ANSS7h1B/scene.splinecode"
-                className="w-full h-full"
-            ></spline-viewer>
-
-            {/* Hidden Logo Overlay */}
-            {/* <span className="absolute bottom-[100px] right-[200px] w-100 p-1 h-100 bg-black z-[5px]">hello</span> */}
-        </div>
+                <div className="flex items-center justify-center min-h-screen ">
+                  <a
+                    href="/path-to-your-resume.pdf"
+                    download="Resume.pdf"
+                    className="px-6 py-3 bg-black/90 text-white font-bold text-lg rounded-lg shadow-md hover:bg-black/70 hover:shadow-lg active:scale-95 transition-transform duration-150 ease-in-out"
+                  >
+                    Download My Resume
+                  </a>
+              </div>
 
       </div>
     </div>

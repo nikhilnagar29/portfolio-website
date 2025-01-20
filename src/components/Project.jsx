@@ -1,12 +1,15 @@
-import React, { useState } from "react";
-import mychessVideo from "../video/MyChess-video.mp4";
-import whiteBoardVideo from "../video/LiveWhiteboard-video.mp4";
-import socioGramVideo from "../video/SocioGram-video.mp4";
-
+import React, { useState, useEffect } from "react";
+import mychessVideo from "../video/mychess.mp4";
+import whiteBoardVideo from "../video/live-whiteboard.mp4";
+import socioGramVideo from "../video/sociogram.mp4";
+import mychessImage from "../video/mychess.jpeg"; // Replace with actual image paths
+import whiteBoardImage from "../video/whiteboard.jpeg";
+import socioGramImage from "../video/sociogram.jpeg";
 import "./CSS/project.css";
 
 const ProjectCards = () => {
-  const [transformStyle, setTransformStyle] = useState({});
+  const [visibleVideos, setVisibleVideos] = useState([]);
+  const [transformStyle, setTransformStyle] = useState({}); // Define state for transform styles
 
   const handleMouseMove = (e, index) => {
     const container = e.currentTarget;
@@ -24,9 +27,33 @@ const ProjectCards = () => {
     setTransformStyle((prev) => ({ ...prev, [index]: style }));
   };
 
+
   const handleMouseLeave = (index) => {
     setTransformStyle((prev) => ({ ...prev, [index]: {} }));
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleVideos((prev) => [...prev, entry.target.dataset.index]);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const videoContainers = document.querySelectorAll(".video-container");
+    videoContainers.forEach((container, index) => {
+      container.dataset.index = index;
+      observer.observe(container);
+    });
+
+    return () => {
+      videoContainers.forEach((container) => observer.unobserve(container));
+    };
+  }, []);
 
   const projects = [
     {
@@ -34,6 +61,7 @@ const ProjectCards = () => {
       description: "A real-time chess game with cross-device connectivity.",
       technologies: "Node.js, Socket.io, chess.js, express",
       video: mychessVideo,
+      image: mychessImage,
       link: "/mychess",
     },
     {
@@ -41,6 +69,7 @@ const ProjectCards = () => {
       description: "A social media platform for sharing posts and following users.",
       technologies: "Express.js, MongoDB, NodeMailer, Cookie-parser, Multer, Twilio",
       video: socioGramVideo,
+      image: socioGramImage,
       link: "/sociogram",
     },
     {
@@ -48,6 +77,7 @@ const ProjectCards = () => {
       description: "A collaborative drawing tool with real-time updates.",
       technologies: "Rough.js, React, Tailwind CSS, Socket.io",
       video: whiteBoardVideo,
+      image: whiteBoardImage,
       link: "/livewhiteboard",
     },
   ];
@@ -66,30 +96,37 @@ const ProjectCards = () => {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-                <a
-                href={project.link}
-                key={index}>
-                    <div
-                        key={index}
-                        className="video-container  max-w-[400px] rounded-lg shadow-lg bg-white/60 mx-auto"
-                        onMouseMove={(e) => handleMouseMove(e, index)}
-                        onMouseLeave={() => handleMouseLeave(index)}
-                        style={transformStyle[index]}
-                    >
-                        <video
-                        className="w-full rounded-md"
-                        autoPlay
-                        loop
-                        muted
-                        src={project.video}
-                        ></video>
-                        <div className="p-3">
-                        <h4 className="text-xl font-semibold text-gray-800 mb-2">{project.title}</h4>
-                        <p className="text-gray-600 text-base md:text-lg">{project.description}</p>
-                        <p className="mt-2 text-sm text-gray-500">{project.technologies}</p>
-                        </div>
-                    </div>
-                </a>
+              <a href={project.link} key={index}>
+                <div
+                  className="video-container max-w-[400px] rounded-lg shadow-lg bg-white/60 mx-auto"
+                  onMouseMove={(e) => handleMouseMove(e, index)}
+                  onMouseLeave={() => handleMouseLeave(index)}
+                  style={transformStyle[index]} // Apply dynamic styles
+                >
+                  {visibleVideos.includes(String(index)) ? (
+                    <video
+                      className="w-full rounded-md"
+                      autoPlay
+                      loop
+                      muted
+                      preload="metadata"
+                      src={project.video}
+                    ></video>
+                  ) : (
+                    <img
+                      className="w-full rounded-md"
+                      src={project.image}
+                      alt={`${project.title} Placeholder`}
+                      loading="lazy"
+                    />
+                  )}
+                  <div className="p-3">
+                    <h4 className="text-xl font-semibold text-gray-800 mb-2">{project.title}</h4>
+                    <p className="text-gray-600 text-base md:text-lg">{project.description}</p>
+                    <p className="mt-2 text-sm text-gray-500">{project.technologies}</p>
+                  </div>
+                </div>
+              </a>
             ))}
           </div>
         </div>

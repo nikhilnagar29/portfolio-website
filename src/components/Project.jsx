@@ -2,24 +2,27 @@ import React, { useState, useEffect } from "react";
 import mychessVideo from "../video/mychess.mp4";
 import whiteBoardVideo from "../video/live-whiteboard.mp4";
 import socioGramVideo from "../video/sociogram.mp4";
-import mychessImage from "../video/mychess.jpeg"; // Replace with actual image paths
+import mychessImage from "../video/mychess.jpeg";
 import whiteBoardImage from "../video/whiteboard.jpeg";
 import socioGramImage from "../video/sociogram.jpeg";
 import "./CSS/project.css";
 
 const ProjectCards = () => {
   const [visibleVideos, setVisibleVideos] = useState([]);
-  const [transformStyle, setTransformStyle] = useState({}); // Define state for transform styles
+  const [transformStyle, setTransformStyle] = useState({});
+  const [isMobile, setIsMobile] = useState(false);
 
+  // MouseMove handler for the zoom effect
   const handleMouseMove = (e, index) => {
+    if (isMobile) return; // Skip zoom effect on mobile devices
+
     const container = e.currentTarget;
     const rect = container.getBoundingClientRect();
 
     // Calculate mouse position relative to the container
-    const x = 5 * ((e.clientX - rect.left) / rect.width - 0.5) * 10; // Smaller motion
+    const x = 5 * ((e.clientX - rect.left) / rect.width - 0.5) * 10;
     const y = 2 * ((e.clientY - rect.top) / rect.height - 0.5) * 10;
 
-    // Apply transform style
     const style = {
       transform: `scale(1.15) translate(${x}px, ${y}px)`,
     };
@@ -27,17 +30,34 @@ const ProjectCards = () => {
     setTransformStyle((prev) => ({ ...prev, [index]: style }));
   };
 
-
+  // MouseLeave handler to reset styles
   const handleMouseLeave = (index) => {
+    if (isMobile) return; // Skip resetting styles on mobile
     setTransformStyle((prev) => ({ ...prev, [index]: {} }));
   };
 
+  // Detect if the device is mobile based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobileDevice = window.innerWidth <= 768;
+      setIsMobile(isMobileDevice);
+    };
+
+    handleResize(); // Run on mount
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Set visible videos using IntersectionObserver
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setVisibleVideos((prev) => [...prev, entry.target.dataset.index]);
+            setVisibleVideos((prev) => [...new Set([...prev, entry.target.dataset.index])]);
           }
         });
       },

@@ -38,10 +38,10 @@ const Model = () => {
                         Welcome to My Portfolio
                     </h2>
                     <h4 className="text-xl md:text-2xl font-semibold text-gray-700 mb-2">
-                        Hi, I'm Nikhil Nagar
+                        Hi, I'm Nikhil 
                     </h4>
                     <p className="text-base md:text-lg text-gray-600">
-                        A 3rd-year student in the Department of Mathematics and Computing at IIT Kharagpur. I am a passionate developer and problem solver, dedicated to crafting innovative digital solutions and mastering the art of algorithmic thinking.
+                    I'm third-year undergraduate student in the Department of Mathematics at IIT Kharagpur, pursuing a Bachelor of Science (BS) degree. I am passionate about solving real-world challenges and building projects that make an impact. I love exploring ideas, turning them into practical solutions, and constantly expanding my knowledge along the way.
                     </p>
                 </div>
 

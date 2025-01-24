@@ -8,21 +8,22 @@ const About = () => {
                     About Me
                 </h2>
                 <p className="text-xl md:text-2xl font-semibold text-gray-700 mb-4">
-                    Full-Stack Developer | Problem Solver
+                Full-Stack Developer | Algorithmic Problem-Solving Enthusiast
                 </p>
                 <p className="text-base md:text-lg text-gray-600 mb-8">
-                    As a full-stack developer, I specialize in crafting modern, scalable, and user-friendly web applications. My expertise lies in delivering seamless user experiences backed by robust and efficient backend solutions. Additionally, I excel in solving complex algorithmic challenges and optimizing computational processes.
+                    I am a proficient full-stack developer passionate about designing and implementing modern, scalable, and intuitive web applications. My expertise lies in creating seamless user interfaces paired with reliable and efficient backend architectures. I excel at addressing complex algorithmic challenges and optimizing computational workflows to deliver high-performance solutions.
                 </p>
                 
                 {/* Development Expertise */}
                 <div className="mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                        Development Expertise
+                        Technical Expertise
                     </h3>
                     <ul className="list-disc list-inside text-base md:text-lg text-gray-600">
-                        <li>Frontend: React.js, Tailwind CSS, EJS</li>
+                        <li>Frontend: React.js, Tailwind CSS, EJS, Javascript</li>
                         <li>Backend: Node.js, Express.js, MongoDB</li>
-                        <li>Additional Skills: REST APIs, WebSocket Programming (Socket.io), Git, Authentication & Authorization, Deployment</li>
+                        <li>Additional Skills: REST API Development, WebSocket Programming (Socket.io), Git Version Control, Authentication & Authorization, and Application Deployment
+                        </li>
                     </ul>
                 </div>
                 
@@ -35,10 +36,10 @@ const About = () => {
                 {/* Problem Solving */}
                 <div>
                     <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                        Problem Solver
+                        Algorithmic Problem-Solving Skills
                     </h3>
                     <p className="text-base md:text-lg text-gray-600">
-                        I have solved over 270 problems on platforms like Codeforces and LeetCode, continually refining my problem-solving skills. Currently, I am advancing my expertise in Data Structures and Algorithms through the AlgoZenith platform, focusing on advanced techniques and algorithmic problem-solving.
+                        I have successfully solved over 270 problems on competitive programming platforms such as Codeforces and LeetCode, consistently refining my problem-solving acumen. I am currently advancing my knowledge of Data Structures and Algorithms through the AlgoZenith platform, with a focus on mastering advanced techniques and tackling complex algorithmic challenges.
                     </p>
                 </div>
             </div>

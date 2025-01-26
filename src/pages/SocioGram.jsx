@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect , useState} from 'react';
 import { checkApiStatus } from '../utils/apiUtils.js';
 import { img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14 } from './sociogram/index.js';
+import resume from '../assets/Nikhil_Nagar_Resume.pdf';
 
 const renderButton = (text, link, primary = true) => (
   <a

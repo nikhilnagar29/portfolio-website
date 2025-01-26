@@ -3,7 +3,7 @@ import emailjs from "@emailjs/browser";
 import github from '../assets/GitHub.png';
 import linkedIn from '../assets/linkedIn.png'
 import X_logo from '../assets/X_logo.jpg'
-
+import resume from '../assets/Nikhil_Nagar_Resume.pdf'
 
 const Contact = () => {
   const formRef = useRef();
@@ -171,15 +171,15 @@ const Contact = () => {
                         </button>
                     </form>
                 </div>
-                <div className="flex items-center justify-center min-h-screen ">
-                  <a
-                    href="/path-to-your-resume.pdf"
-                    download="Resume.pdf"
-                    className="px-6 py-3 bg-black/90 text-white font-bold text-lg rounded-lg shadow-md hover:bg-black/70 hover:shadow-lg active:scale-95 transition-transform duration-150 ease-in-out"
-                  >
-                    Download My Resume
-                  </a>
-              </div>
+                <div className="flex items-center justify-center min-h-screen">
+                    <a
+                      href={resume} // Ensure the file is accessible from the public route
+                      download="Resume.pdf" // Renames the file to Resume.pdf on download
+                      className="px-6 py-3 bg-black/90 text-white font-bold text-lg rounded-lg shadow-md hover:bg-black/70 hover:shadow-lg active:scale-95 transition-transform duration-150 ease-in-out"
+                    >
+                      Download My Resume
+                    </a>
+                </div>
 
       </div>
     </div>

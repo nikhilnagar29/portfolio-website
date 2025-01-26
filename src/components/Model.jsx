@@ -41,7 +41,7 @@ const Model = () => {
                         Hi, I'm Nikhil 
                     </h4>
                     <p className="text-base md:text-lg text-gray-600">
-                    I'm third-year undergraduate student in the Department of Mathematics at IIT Kharagpur, pursuing a Bachelor of Science (BS) degree. I am passionate about solving real-world challenges and building projects that make an impact. I love exploring ideas, turning them into practical solutions, and constantly expanding my knowledge along the way.
+                    I'm a third-year undergraduate student in the Department of Mathematics at IIT Kharagpur, pursuing a Bachelor of Science (BS) degree. I am passionate about solving real-world challenges and building projects that make an impact. I love exploring ideas, turning them into practical solutions, and constantly expanding my knowledge along the way.
                     </p>
                 </div>
 

@@ -174,7 +174,7 @@ const Contact = () => {
                 <div className="flex items-center justify-center min-h-screen">
                     <a
                       href={resume} // Ensure the file is accessible from the public route
-                      download="Resume.pdf" // Renames the file to Resume.pdf on download
+                      download="Nikhil-Nagar-Resume.pdf" // Renames the file to Resume.pdf on download
                       className="px-6 py-3 bg-black/90 text-white font-bold text-lg rounded-lg shadow-md hover:bg-black/70 hover:shadow-lg active:scale-95 transition-transform duration-150 ease-in-out"
                     >
                       Download My Resume

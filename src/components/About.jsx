@@ -15,7 +15,7 @@ const About = () => {
                 </p>
                 
                 {/* Development Expertise */}
-                <div className="mb-8">
+                {/* <div className="mb-8">
                     <h3 className="text-2xl font-bold text-gray-800 mb-4">
                         Technical Expertise
                     </h3>
@@ -25,7 +25,7 @@ const About = () => {
                         <li>Additional Skills: REST API Development, WebSocket Programming (Socket.io), Git Version Control, Authentication & Authorization, and Application Deployment
                         </li>
                     </ul>
-                </div>
+                </div> */}
                 
                 {/* Notable Projects */}
                

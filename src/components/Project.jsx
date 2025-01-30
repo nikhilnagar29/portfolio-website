@@ -144,6 +144,7 @@ const ProjectCards = () => {
                     <h4 className="text-xl font-semibold text-gray-800 mb-2">{project.title}</h4>
                     <p className="text-gray-600 text-base md:text-lg">{project.description}</p>
                     <p className="mt-2 text-sm text-gray-500">{project.technologies}</p>
+                    <p className="mt-2 text-sm text-blue-500 underline">View Project</p>
                   </div>
                 </div>
               </a>

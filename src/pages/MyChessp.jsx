@@ -39,7 +39,7 @@ const Documentation = () => {
         </section>
         
         {/* CSS/JS Code Explanation */}
-        <h2 className="text-2xl font-bold mb-4">1. Features of My Chess Game 🕹️</h2>
+        <h2 className="text-2xl font-bold mb-4">1. Features of MyChess Game 🕹️</h2>
         <div className="flex flex-col md:flex-row mb-12">
           {/* Left Side */}
           
